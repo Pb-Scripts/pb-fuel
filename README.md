@@ -10,3 +10,4 @@ None
 * ox_lib (temporary)
 * ox_target
 * pb-utils
+* baseevents
