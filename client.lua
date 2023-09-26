@@ -32,7 +32,7 @@ Citizen.CreateThread(function()
                 pb.playAnim('anim@am_hold_up@male', 'shoplift_high', 50, 1000)
                 bocal  = pb.AttachProp('prop_cs_fuel_nozle', GetPedBoneIndex(PlayerPedId(), 18905), 1, 0.13, 0.04, 0.01, -42.0, -115.0, -63.42)
                 usingpump = true
-                local point = lib.points.new(GetEntityCoords(data.entity), 20)
+                local point = pb.points.new(GetEntityCoords(data.entity), 20)
                 function point:onEnter()
                     function point:onExit()
                         DeleteBocal()
@@ -69,7 +69,7 @@ Citizen.CreateThread(function()
             end,
             onSelect = function(data)
                 local fuel = Round(100.0 - GetVehicleFuelLevel(data.entity))
-                local input = lib.inputDialog(locale('payfuelmenu'), {
+                local input = pb.inputDialog(locale('payfuelmenu'), {
                     {type = 'number', label = locale('fuel_quantity'), description = locale('fuel_quantity_desc', fuel), min = 0.1, max = fuel, required = true, icon = "fa-solid fa-droplet"},
                     {type = 'select', label = locale('type_payment'), options = 
                         {
