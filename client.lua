@@ -57,9 +57,9 @@ Citizen.CreateThread(function()
             end
         },
     }
-    exports.ox_target:addModel(fuel_props, options)
+    pb.addTargetToEntity(fuel_props, options)
 
-    exports.ox_target:addGlobalVehicle({
+    pb.addGlobalVehicleTarget({
         {
             label = locale('fuelvehicle'),
             name = 'fuelvehiclenozzle',
