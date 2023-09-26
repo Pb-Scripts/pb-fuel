@@ -89,7 +89,7 @@ Citizen.CreateThread(function()
                 if input[2] then --Bank
                     if not Config.BankRemove(fueltofill) then return end
                 else --Cash
-                    if Config.MoneyRemove(fueltofill) then return end
+                    if not Config.MoneyRemove(fueltofill) then return end
                 end
                 isrefulling = true
                 pb.playAnim('timetable@gardener@filling_can', 'gar_ig_5_filling_can', 1, Config.FuelTime)
