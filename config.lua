@@ -6,7 +6,7 @@ end
 
 Config.MoneyRemove = function(fueltofill) --> ox_inventory example
 	if not pb.hasItem("money", fueltofill*Config.PricePerL) then
-		lib.notify({
+		pb.notify({
 			type = 'error',
 			title = locale('error'),
 			description = locale('not_enough_money')
