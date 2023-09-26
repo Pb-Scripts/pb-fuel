@@ -7,6 +7,5 @@ None
 
 ### Requirements
 
-* ox_target
 * pb-utils
 * baseevents
