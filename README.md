@@ -1,7 +1,7 @@
 # pb-fuel
 
 ## Config
-[![How to clone](https://i.imgur.com/ZTCtXzA.png)](https://streamable.com/rbnh2a)
+[![How to clone](https://i.imgur.com/ZTCtXzA.png)]()
 ## Exports
 None
 
