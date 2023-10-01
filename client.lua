@@ -11,7 +11,7 @@ local fuel_props = {
 local usingpump, isrefulling = false, false
 local bocal
 
-pb.locale()
+pb.locales()
 
 local function DeleteBocal()
     DeleteObject(bocal)
@@ -32,7 +32,7 @@ Citizen.CreateThread(function()
                 pb.playAnim('anim@am_hold_up@male', 'shoplift_high', 50, 1000)
                 bocal  = pb.AttachProp('prop_cs_fuel_nozle', GetPedBoneIndex(PlayerPedId(), 18905), 1, 0.13, 0.04, 0.01, -42.0, -115.0, -63.42)
                 usingpump = true
-                local point = pb.points.new(GetEntityCoords(data.entity), 20)
+                local point = pb.marks.new(GetEntityCoords(data.entity), 20)
                 function point:onEnter()
                     function point:onExit()
                         DeleteBocal()
@@ -89,7 +89,7 @@ Citizen.CreateThread(function()
                 if input[2] then --Bank
                     if not Config.BankRemove(fueltofill) then return end
                 else --Cash
-                    if Config.MoneyRemove(fueltofill) then return end
+                    if not Config.MoneyRemove(fueltofill) then return end
                 end
                 isrefulling = true
                 pb.playAnim('timetable@gardener@filling_can', 'gar_ig_5_filling_can', 1, Config.FuelTime)
@@ -108,7 +108,7 @@ AddEventHandler('pb-fuel:enteredVehicle', function(targetVehicle)
         if IsVehicleEngineOn(targetVehicle) then
             local fuel = GetVehicleFuelLevel(targetVehicle)
             if fuel > 0 then
-                SetVehicleFuelLevel(targetVehicle, fuel - Config.FuelUsage[Round(GetVehicleCurrentRpm(targetVehicle), 1)] * (Config.Classes[GetVehicleClass(targetVehicle)] or 1.0) / 10)
+                SetVehicleFuelLevel(targetVehicle, fuel - Config.FuelUsage[Round(GetVehicleCurrentRpm(targetVehicle), 1)] * (Config.Classes[GetVehicleClass(targetVehicle)] or 1.0) / 1)
             else
                 SetVehicleFuelLevel(targetVehicle, 0.0)
             end
