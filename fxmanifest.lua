@@ -9,6 +9,7 @@ files {
 }
 
 shared_scripts {
+    '@ox_lib/init.lua',
     '@pb-utils/init.lua',
     'config.lua'
 }

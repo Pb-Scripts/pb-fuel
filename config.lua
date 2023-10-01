@@ -1,7 +1,7 @@
 Config = {}
 
-Config.BankRemove = function() --> Qbcore Example
-	return pb.callback.await('pb-utils:removeBankMoney', fueltofill*Config.PricePerL)
+Config.BankRemove = function(fueltofill) --> Qbcore Example
+	return pb.callback.await('pb-utils:removeBankMoney', false, fueltofill*Config.PricePerL)
 end
 
 Config.MoneyRemove = function(fueltofill) --> ox_inventory example
