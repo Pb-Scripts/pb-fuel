@@ -7,5 +7,5 @@ None
 
 ### Requirements
 
-* pb-utils
+* ox_lib
 * baseevents
