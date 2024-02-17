@@ -63,7 +63,7 @@ Citizen.CreateThread(function()
                 local point = lib.points.new(coords, 20)
                 function point:onEnter()
                     function point:onExit()
-                        AddExplosion(coords, 9, 200.0, true, false, true)
+                        if bocal then AddExplosion(coords, 9, 200.0, true, false, true) end
                         DeleteBocal()
                         usingpump = false
                         point:remove()
