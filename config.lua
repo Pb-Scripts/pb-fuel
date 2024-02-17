@@ -1,57 +1,56 @@
 Config = {}
 
 Config.BankRemove = function(fueltofill) --> Qbcore Example
-	return pb.callback.await('pb-utils:removeBankMoney', false, fueltofill*Config.PricePerL)
+	return lib.callback.await('pb:utils:removeBankMoney', false, fueltofill*Config.PricePerL)
 end
 
 Config.MoneyRemove = function(fueltofill) --> ox_inventory example
-	if not pb.hasItem("money", fueltofill*Config.PricePerL) then
-		pb.notify({
+	if not lib.callback.await('pb:utils:removeItem', false, 'money', fueltofill*Config.PricePerL) then 
+		lib.notify({
 			type = 'error',
 			title = locale('error'),
 			description = locale('not_enough_money')
 		})
 		return
 	end
-	if not pb.callback.await('pb-utils:removeItem', false, 'money', fueltofill*Config.PricePerL) then return end
 	return true
 end
 
 Config.PricePerL = 10 --max tank 100*this
-Config.FuelTime = 5000
+Config.FuelTime = 250
 
-Config.Classes = {
-	[0] = 1.0, -- Compacts
-	[1] = 1.0, -- Sedans
-	[2] = 1.0, -- SUVs
-	[3] = 1.0, -- Coupes
-	[4] = 1.0, -- Muscle
-	[5] = 1.0, -- Sports Classics
-	[6] = 1.0, -- Sports
-	[7] = 1.0, -- Super
-	[8] = 1.0, -- Motorcycles
-	[9] = 1.0, -- Off-road
-	[10] = 1.0, -- Industrial
-	[11] = 1.0, -- Utility
-	[12] = 1.0, -- Vans
+Config.Classes = { -- Class multipliers. If you want SUVs to use less fuel, you can change it to anything under 1.0, and vise versa.
+	[0] = 0.2, -- Compacts
+	[1] = 0.3, -- Sedans
+	[2] = 0.55, -- SUVs
+	[3] = 0.35, -- Coupes
+	[4] = 0.4, -- Muscle
+	[5] = 0.45, -- Sports Classics
+	[6] = 0.5, -- Sports
+	[7] = 0.6, -- Super
+	[8] = 0.25, -- Motorcycles
+	[9] = 0.4, -- Off-road
+	[10] = 0.6, -- Industrial
+	[11] = 0.6, -- Utility
+	[12] = 0.6, -- Vans
 	[13] = 0.0, -- Cycles
-	[14] = 1.0, -- Boats
-	[15] = 1.0, -- Helicopters
-	[16] = 1.0, -- Planes
-	[17] = 1.0, -- Service
-	[18] = 1.0, -- Emergency
-	[19] = 1.0, -- Military
-	[20] = 1.0, -- Commercial
-	[21] = 1.0, -- Trains
+	[14] = 0.75, -- Boats
+	[15] = 8.0, -- Helicopters
+	[16] = 0.4, -- Planes
+	[17] = 0.35, -- Service
+	[18] = 0.3, -- Emergency
+	[19] = 0.3, -- Military
+	[20] = 0.5, -- Commercial
+	[21] = 0.7, -- Trains
 }
 
-Config.FuelUsage = {
-	[1.0] = 1.3,
-	[0.9] = 1.1,
-	[0.8] = 0.9,
-	[0.7] = 0.8,
-	[0.6] = 0.7,
-	[0.5] = 0.5,
+Config.FuelUsage = { -- The left part is at percentage RPM, and the right is how much fuel (divided by 10) you want to remove from the tank every second
+	[1.0] = 0.9,
+	[0.9] = 0.75,
+	[0.8] = 0.6,
+	[0.7] = 0.5,
+	[0.6] = 0.4,
+	[0.5] = 0.35,
 	[0.4] = 0.3,
 	[0.3] = 0.2,
 	[0.2] = 0.1,
