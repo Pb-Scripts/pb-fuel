@@ -1,0 +1,12 @@
+{
+    "getnozzle": "Pegar no Bocal",
+    "putnozzle": "Guardar o Bocal",
+    "fuelvehicle": "Abastecer Veículo",
+    "fuel_quantity": "Quantidade a Abastecer",
+    "type_payment": "Tipo de pagamento",
+    "fuel_quantity_desc" : "Quantidade máxima: %s",
+    "cash": "Dinheiro",
+    "bank": "Multibanco",
+    "error": "Erro",
+    "not_enough_money": "Tás pior que teso"
+}

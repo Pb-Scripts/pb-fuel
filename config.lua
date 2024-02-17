@@ -1,11 +1,11 @@
 Config = {}
 
 Config.BankRemove = function(fueltofill) --> Qbcore Example
-	return lib.callback.await('pb:utils:removeBankMoney', false, fueltofill*Config.PricePerL)
+	return lib.callback.await('pb-fuel:removeBankMoney', false, fueltofill*Config.PricePerL)
 end
 
 Config.MoneyRemove = function(fueltofill) --> ox_inventory example
-	if not lib.callback.await('pb:utils:removeItem', false, 'money', fueltofill*Config.PricePerL) then 
+	if not lib.callback.await('pb-fuel:removeItem', false, 'money', fueltofill*Config.PricePerL) then 
 		lib.notify({
 			type = 'error',
 			title = locale('error'),

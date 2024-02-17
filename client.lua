@@ -49,7 +49,13 @@ Citizen.CreateThread(function()
             onSelect = function(data)
                 local coords = GetEntityCoords(data.entity)
 
-                lib.playAnim('anim@am_hold_up@male', 'shoplift_high', 50, 1000)
+                while (not HasAnimDictLoaded('anim@am_hold_up@male')) do RequestAnimDict('anim@am_hold_up@male') Wait(0) end
+                
+                TaskPlayAnim(PlayerPedId(), 'anim@am_hold_up@male', 'shoplift_high', 8.0, -8, -1, 50, 0, 0, 0, 0)
+                
+                Wait(1000)
+
+                ClearPedTasks(PlayerPedId())
 
                 bocal  = lib.AttachProp('prop_cs_fuel_nozle', GetPedBoneIndex(PlayerPedId(), 18905), 1, 0.13, 0.04, 0.01, -42.0, -115.0, -63.42)
                 usingpump = true
@@ -74,15 +80,21 @@ Citizen.CreateThread(function()
                 return (not IsPedInAnyVehicle(PlayerPedId()) and usingpump and not isrefulling)
             end,
             onSelect = function()
-                lib.playAnim('anim@am_hold_up@male', 'shoplift_high', 50, 1000)
+                while (not HasAnimDictLoaded('anim@am_hold_up@male')) do RequestAnimDict('anim@am_hold_up@male') Wait(0) end
+                
+                TaskPlayAnim(PlayerPedId(), 'anim@am_hold_up@male', 'shoplift_high', 8.0, -8, -1, 50, 0, 0, 0, 0)
+                
+                Wait(1000)
+
+                ClearPedTasks(PlayerPedId())
                 DeleteBocal()
                 usingpump = false
             end
         },
     }
-    lib.addTargetToEntity(fuel_props, options)
+    exports.ox_target:addModel(fuel_props, options)
 
-    lib.addGlobalVehicleTarget({
+    exports.ox_target:addGlobalVehicle({
         {
             label = locale('fuelvehicle'),
             name = 'fuelvehiclenozzle',
@@ -110,14 +122,36 @@ Citizen.CreateThread(function()
                 if not input then return end
                 local fueltofill = input[1]
                 if input[2] then --Bank
-                    if not Config.BankRemove(fueltofill) then return end
+                    if not Config.BankRemove(fueltofill) then 
+                        lib.notify({
+                            title = 'Morcão',
+                            description = 'Tás mais teso que um carapau',
+                            type = 'error'
+                        })
+                        return 
+                    end
                 else --Cash
-                    if not Config.MoneyRemove(fueltofill) then return end
+                    if not Config.MoneyRemove(fueltofill) then 
+                        lib.notify({
+                            title = 'Morcão',
+                            description = 'Tás mais teso que um carapau',
+                            type = 'error'
+                        })
+                        return 
+                    end
                 end
                 isrefulling = true
                 local time = GetVehicleClass(data.entity) == 15 and 60000 or Config.FuelTime * fueltofill
                 FreezeEntityPosition(PlayerPedId(), true)
-                lib.playAnim('timetable@gardener@filling_can', 'gar_ig_5_filling_can', 1, time)
+
+                while (not HasAnimDictLoaded('timetable@gardener@filling_can')) do RequestAnimDict('timetable@gardener@filling_can') Wait(0) end
+                
+                TaskPlayAnim(PlayerPedId(), 'timetable@gardener@filling_can', 'gar_ig_5_filling_can', 8.0, -8, -1, 1, 0, 0, 0, 0)
+                
+                Wait(time)
+
+                ClearPedTasks(PlayerPedId())
+
                 FreezeEntityPosition(PlayerPedId(), false)
                 fuel = GetVehicleFuelLevel(data.entity) + (input[1] + 0.0)
                 if fuel > 100.0 then fuel = 100.0 end
